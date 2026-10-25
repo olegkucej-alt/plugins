@@ -1,4 +1,4 @@
-//18.10.2026 - Fix
+//25.10.2026 - Fix
 
 (function () {
     'use strict';
@@ -1687,7 +1687,7 @@
       var error_message = '';
 
       function checkErrorForm(str) {
-        var login_form = str.match(/<form id="check-form" class="check-form" method="post" action="\/ajax\/login\/">/);
+        var login_form = str.match(/<form id="check-form" class="check-form" method="post" action="\/ajax\/login\/">/) || str.match(/<form id="loginForm" action="\/ajax\/login\/"/);
 
         if (login_form) {
           error_message = Lampa.Lang.translate('online_mod_authorization_required') + ' HDrezka';
@@ -7659,8 +7659,7 @@
       var host = Utils.decodeSecret([95, 57, 28, 42, 55, 125, 28, 124, 25, 93, 66, 41, 7, 46, 48, 49, 92, 33, 25, 64, 26, 33, 7, 40, 32, 33, 90, 63, 23, 27, 69, 56], atob('RnVja0Zhbg=='));
       var ref = host + '/';
       var user_agent = Utils.baseUserAgent();
-
-      var embed_host = (prefer_http ? 'http:' : 'https:') + atob('Ly9sb21vbnQuc2l0ZQ==');
+      var embed_host = (prefer_http ? 'http:' : 'https:') + atob('Ly9tYWxzZWQuc2l0ZQ==');
       var embed = embed_host + '/';
       var headers = Lampa.Platform.is('android') ? {
         'Origin': host,
@@ -15222,6 +15221,8 @@
       this.contextmenu = function (params) {
         contextmenu_all.push(params);
         params.item.on('hover:long', function () {
+          var enabled = Lampa.Controller.enabled().name;
+
           function selectQuality(title, callback) {
             return function (extra) {
               if (extra.quality) {
@@ -15246,7 +15247,6 @@
             };
           }
 
-          var enabled = Lampa.Controller.enabled().name;
           var menu = [{
             title: Lampa.Lang.translate('torrent_parser_label_title'),
             mark: true
@@ -15467,7 +15467,7 @@
       };
     }
 
-    var mod_version = '18.10.2026';
+    var mod_version = '25.10.2026';
     var isMSX = !!(window.TVXHost || window.TVXManager);
     var isTizen = navigator.userAgent.toLowerCase().indexOf('tizen') !== -1;
     var isIFrame = window.parent !== window;
