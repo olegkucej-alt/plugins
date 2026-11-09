@@ -14007,7 +14007,7 @@
       search: false,
       kp: true,
       imdb: true,
-      disabled: true
+      disabled: false
     }, {
       name: 'filmix',
       title: 'Filmix',
